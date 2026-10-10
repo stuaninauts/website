@@ -6,6 +6,7 @@ export const ogLocale: Record<Lang, string> = { en: 'en_US', pt: 'pt_BR' };
 
 const en = {
   'site.description': 'Eduardo Stuani, Data & AI Engineer. Data pipelines at scale and LLM systems in production.',
+  'og.alt': 'Eduardo Stuani, Data & AI Engineer, next to an ink ensō circle with a red dot like a star on an orbit',
   'nav.work': 'Work',
   'nav.experience': 'Experience',
   'nav.about': 'About',
@@ -65,6 +66,7 @@ const en = {
 
 const pt: Record<keyof typeof en, string> = {
   'site.description': 'Eduardo Stuani, Engenheiro de Dados e IA. Pipelines de dados em escala e sistemas com LLM em produção.',
+  'og.alt': 'Eduardo Stuani, Engenheiro de Dados e IA, ao lado de um círculo ensō a nanquim com um ponto vermelho, como uma estrela numa órbita',
   'nav.work': 'Projetos',
   'nav.experience': 'Experiência',
   'nav.about': 'Sobre',
