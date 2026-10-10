@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Logo da organização; sem arquivo, mostra as iniciais num quadrado no estilo do carimbo.
+interface Props { org: string; logo?: ImageMetadata }
+const { org, logo } = Astro.props;
+const initials = org.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+---
+
+{logo ? (
+  <Image src={logo} alt="" width={44} height={44} class="mark logo" />
+) : (
+  <span class="mark mono" aria-hidden="true">{initials}</span>
+)}
+
+<style>
+  .mark { width: 44px; height: 44px; border-radius: 6px; flex: none; }
+  .logo { object-fit: contain; background: #fff; padding: 6px; border: 1px solid var(--line); }
+  span.mark { display: grid; place-items: center; border: 1px solid var(--line-2); color: var(--muted); font-size: 14px; letter-spacing: .04em; }
+</style>
