@@ -1,0 +1,39 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# local
+.tools/
+.env.*
+!.env.example
+CLAUDE.local.md
+.claude/settings.local.json
+.wrangler/
+
+.claude/worktrees/
+.dev.vars
+.dev.vars.*
+
+# prompts de geração de imagem (fora do git por enquanto)
+/prompts/
