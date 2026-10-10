@@ -1,0 +1,43 @@
+---
+import { localizePath, stripLang, useTranslations } from '../i18n/ui';
+
+// Só nas páginas em inglês. Fica escondido no HTML e aparece via JS quando o navegador
+// prefere português, sem redirecionar, para não atrapalhar buscadores nem quem escolheu EN.
+const t = useTranslations('pt');
+const href = localizePath(stripLang(Astro.url.pathname), 'pt');
+---
+
+<div class="hint" lang="pt-BR" role="status" hidden data-lang-hint>
+  <span>{t('lang.hint')}</span>
+  <a href={href} hreflang="pt-BR" data-lang-hint-go>{t('lang.hint.go')} →</a>
+  <button type="button" aria-label={t('lang.hint.close')} data-lang-hint-close>×</button>
+</div>
+
+<script>
+  const KEY = 'lang-hint';
+  const el = document.querySelector<HTMLElement>('[data-lang-hint]');
+  const prefersPt = navigator.languages.some((l) => l.toLowerCase().startsWith('pt'));
+  let seen = false;
+  try { seen = localStorage.getItem(KEY) !== null; } catch {}
+  if (el && prefersPt && !seen) {
+    el.hidden = false;
+    const done = () => { try { localStorage.setItem(KEY, '1'); } catch {} };
+    el.querySelector('[data-lang-hint-go]')?.addEventListener('click', done);
+    el.querySelector('[data-lang-hint-close]')?.addEventListener('click', () => { done(); el.hidden = true; });
+  }
+</script>
+
+<style>
+  .hint {
+    position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 30;
+    display: flex; align-items: center; gap: 14px; padding: 10px 10px 10px 18px; max-width: calc(100% - 32px);
+    background: var(--card); border: 1px solid var(--line-2); border-radius: 12px; font-size: 14px; width: max-content;
+    box-shadow: 0 18px 40px -20px rgb(0 0 0 / .5); animation: rise .4s var(--ease);
+  }
+  .hint[hidden] { display: none; }
+  .hint span { min-width: 0; }
+  .hint a { font-weight: 500; white-space: nowrap; }
+  .hint button { border: 0; background: transparent; color: var(--muted); font-size: 20px; line-height: 1; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; }
+  .hint button:hover { background: var(--card-2); color: var(--ink); }
+  @keyframes rise { from { opacity: 0; transform: translate(-50%, 8px); } }
+</style>

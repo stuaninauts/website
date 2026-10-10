@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { useTranslations } from '../i18n/ui';
+
+const t = useTranslations('en');
+const tp = useTranslations('pt');
+---
+
+<Base title={t('404.title')} translated={false}>
+  <section class="wrap nf">
+    <span class="seal" aria-hidden="true">迷</span>
+    <h1>404 · {t('404.title')}</h1>
+    <p class="muted">{t('404.body')} <span lang="pt-BR">/ {tp('404.body')}</span></p>
+    <p><a class="btn primary" href="/">{t('404.back')}</a> <a class="btn" href="/pt/" lang="pt-BR">{tp('404.back')}</a></p>
+  </section>
+</Base>
+
+<style>
+  .nf { padding-top: 96px; display: grid; gap: 18px; justify-items: start; }
+  .seal { --s: 64px; }
+  h1 { font-size: clamp(28px, 5vw, 40px); }
+  p:last-child { display: flex; gap: 10px; flex-wrap: wrap; }
+</style>

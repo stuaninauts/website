@@ -1,0 +1,24 @@
+---
+import { person } from '../data/profile';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const t = useTranslations(Astro.props.lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <p><span class="seal" aria-hidden="true" title={t('seal.title')}>宙</span> © {year} {person.name}</p>
+    <p class="muted">
+      {t('footer.built')} · <a href={person.links.source}>{t('footer.source')}</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .foot { margin-top: clamp(72px, 10vw, 120px); border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14px; }
+  .foot-inner { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
+  .foot p { display: flex; align-items: center; gap: 10px; }
+  .seal { --s: 22px; }
+</style>
