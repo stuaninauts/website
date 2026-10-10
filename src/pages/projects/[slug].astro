@@ -1,0 +1,9 @@
+---
+import ProjectView from '../../views/ProjectView.astro';
+import { projectPaths } from '../../lib/projects';
+
+export const getStaticPaths = () => projectPaths('en');
+const { project, category, prev, next } = Astro.props;
+---
+
+<ProjectView project={project} category={category} prev={prev} next={next} lang="en" />

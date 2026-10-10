@@ -1,0 +1,17 @@
+---
+// Capa provisória para projetos ainda sem imagem: ensō + nome, nas cores do tema.
+interface Props { title: string; class?: string }
+const { title, class: className } = Astro.props;
+---
+
+<div class:list={['ph', className]} aria-hidden="true">
+  <svg viewBox="0 0 200 200"><path d="M100 22c43 0 78 34 78 77 0 44-35 79-79 79-42 0-77-35-77-78 0-36 24-64 57-74" /></svg>
+  <span class="mono">{title}</span>
+</div>
+
+<style>
+  .ph { position: relative; display: grid; place-items: center; background: var(--card-2); overflow: hidden; }
+  svg { position: absolute; height: 78%; aspect-ratio: 1; opacity: .5; }
+  path { fill: none; stroke: var(--line-2); stroke-width: 5; stroke-linecap: round; }
+  span { position: relative; font-size: 15px; letter-spacing: .12em; color: var(--muted); text-transform: lowercase; padding: 0 16px; text-align: center; }
+</style>
