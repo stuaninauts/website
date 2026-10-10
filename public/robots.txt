@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stuaninauts.com/sitemap-index.xml

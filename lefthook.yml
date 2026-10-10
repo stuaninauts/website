@@ -1,0 +1,6 @@
+# Hooks locais de git (instalados por `npm install` via script "prepare").
+# O gitleaks é um binário separado: https://github.com/gitleaks/gitleaks/releases (v8.x no PATH).
+pre-commit:
+  jobs:
+    - name: gitleaks
+      run: gitleaks git --pre-commit --redact --staged --verbose

@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "stuaninauts-website",
+  "compatibility_date": "2026-10-08",
+  // Site 100% estático: sem Worker, só os arquivos de dist/.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "stuaninauts.com", "custom_domain": true }],
+  // Evita o site duplicado em *.workers.dev (conteúdo duplicado para buscadores).
+  "workers_dev": false
+}

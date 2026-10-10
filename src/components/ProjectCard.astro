@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import CoverPlaceholder from './CoverPlaceholder.astro';
+import Metrics from './Metrics.astro';
+import { localizePath, type Lang } from '../i18n/ui';
+
+// withMetrics: só benchmarks mostram números no card (docs/decisions/0002).
+interface Props { project: CollectionEntry<'projects'>; lang: Lang; withMetrics?: boolean }
+const { project, lang, withMetrics = false } = Astro.props;
+const slug = project.id.split('/')[1];
+const { title, summary, stack, metrics, cover, coverAlt } = project.data;
+---
+
+<article class="card project">
+  {cover ? (
+    <Image src={cover} alt={coverAlt ?? ''} width={480} height={300} class="cover" loading="lazy" />
+  ) : (
+    <CoverPlaceholder title={title} class="cover" />
+  )}
+  <div class="body">
+    <h3><a href={localizePath(`/projects/${slug}`, lang)}>{title}</a></h3>
+    <p class="summary">{summary}</p>
+    {withMetrics && <Metrics items={metrics.slice(0, 2)} compact />}
+    <ul class="chips">{stack.slice(0, 3).map((s) => <li class="chip">{s}</li>)}</ul>
+  </div>
+</article>
+
+<style>
+  .project { padding: 0; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+  .project:hover { border-color: var(--line-2); transform: translateY(-2px); }
+  .project :global(.cover) { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--line); filter: saturate(.85); }
+  .body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  h3 { font-size: 20px; }
+  h3 a { color: var(--ink); text-decoration: none; }
+  /* o card inteiro é clicável, mas o link continua sendo o título (bom para leitores de tela) */
+  h3 a::after { content: ''; position: absolute; inset: 0; }
+  h3 a:focus-visible { outline: none; }
+  .project:has(h3 a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .summary { color: var(--ink-2); font-size: 15px; flex: 1; }
+  .chips { margin-top: 8px; }
+  .chip { font-size: 12px; padding: 5px 9px; }
+</style>

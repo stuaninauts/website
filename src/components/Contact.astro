@@ -1,0 +1,31 @@
+---
+import { person } from '../data/profile';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+
+<!-- O endereço é montado no navegador a partir de duas partes, para não aparecer cru no HTML
+     (corta a maior parte dos robôs que coletam emails). Sem JS, ficam só LinkedIn e GitHub. -->
+<ul class="contact">
+  <li hidden data-email>
+    <a class="btn primary" data-email-user={person.emailUser[lang]} data-email-domain={person.emailDomain}></a>
+  </li>
+  <li><a class="btn" href={person.links.linkedin} rel="me">LinkedIn</a></li>
+  <li><a class="btn" href={person.links.github} rel="me">GitHub</a></li>
+</ul>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('[data-email-user]').forEach((a) => {
+    const address = `${a.dataset.emailUser}@${a.dataset.emailDomain}`;
+    a.href = `mailto:${address}`;
+    a.textContent = address;
+    a.closest('[data-email]')?.removeAttribute('hidden');
+  });
+</script>
+
+<style>
+  .contact { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; }
+  .contact .btn { font-family: var(--mono); font-size: 14px; }
+</style>

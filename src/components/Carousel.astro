@@ -1,0 +1,90 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+// Galeria em carrossel: scroll-snap em CSS (funciona sem JS e com as setas do teclado);
+// o script só revela os botões e o contador. Sem autoplay. Padrão WAI-ARIA APG.
+interface Props { lang: Lang; label: string; items: { src: ImageMetadata; alt: string; caption: string }[] }
+const { lang, label, items } = Astro.props;
+const t = useTranslations(lang);
+const id = `carousel-${label.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')}`;
+const large = await Promise.all(items.map((i) => getImage({ src: i.src, width: Math.min(i.src.width, 1920), format: 'webp' })));
+---
+
+<section class="carousel" role="region" aria-roledescription={t('carousel.label')} aria-label={label} data-carousel>
+  <ul class="track" id={id} tabindex="0">
+    {items.map((item, i) => (
+      <li class="slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} ${t('carousel.of')} ${items.length}`}>
+        <figure>
+          <a class="frame" href={large[i].src} title={t('carousel.open')}>
+            <Image src={item.src} alt={item.alt} widths={[640, 960, 1280]} sizes="(max-width: 1080px) 92vw, 1016px" loading={i === 0 ? 'eager' : 'lazy'} />
+          </a>
+          <figcaption>{item.caption}</figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+  <div class="controls" hidden data-controls>
+    <button type="button" data-prev aria-controls={id} aria-label={t('carousel.prev')}>‹</button>
+    <span class="count mono" aria-live="polite" data-count>1 / {items.length}</span>
+    <button type="button" data-next aria-controls={id} aria-label={t('carousel.next')}>›</button>
+  </div>
+</section>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('.track')!;
+    const slides = [...track.querySelectorAll<HTMLElement>('.slide')];
+    const controls = root.querySelector<HTMLElement>('[data-controls]')!;
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = root.querySelector<HTMLButtonElement>('[data-next]')!;
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    let current = 0;
+    const update = (i: number) => {
+      current = i;
+      count.textContent = `${i + 1} / ${slides.length}`;
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    };
+    const go = (i: number) => {
+      const s = slides[Math.max(0, Math.min(slides.length - 1, i))];
+      track.scrollTo({ left: s.offsetLeft - track.offsetLeft, behavior: reduced.matches ? 'auto' : 'smooth' });
+    };
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && update(slides.indexOf(e.target as HTMLElement))),
+      { root: track, threshold: 0.6 },
+    );
+    slides.forEach((s) => io.observe(s));
+    prev.addEventListener('click', () => go(current - 1));
+    next.addEventListener('click', () => go(current + 1));
+    controls.hidden = false;
+    update(0);
+  });
+</script>
+
+<style>
+  .carousel { display: grid; gap: 12px; }
+  .track {
+    display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    list-style: none; padding: 0 0 6px; margin: 0; scrollbar-width: thin; overscroll-behavior-x: contain;
+  }
+  .track:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .slide { flex: 0 0 100%; scroll-snap-align: center; }
+  figure { margin: 0; }
+  .frame { display: block; aspect-ratio: 16 / 9; background: var(--card-2); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .frame :global(img) { width: 100%; height: 100%; object-fit: contain; }
+  figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; }
+  .controls { display: flex; align-items: center; gap: 12px; justify-content: flex-end; }
+  .controls[hidden] { display: none; }
+  button {
+    width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-2); background: transparent;
+    color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; transition: background .2s;
+  }
+  button:hover:not(:disabled) { background: var(--card-2); }
+  button:disabled { opacity: .35; cursor: default; }
+  .count { font-size: 13px; color: var(--muted); min-width: 44px; text-align: center; }
+  @media (max-width: 760px) { .slide { flex-basis: 88%; } }
+  @media (prefers-reduced-motion: reduce) { .track { scroll-behavior: auto; } }
+</style>

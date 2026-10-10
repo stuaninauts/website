@@ -1,0 +1,96 @@
+---
+import { localizePath, stripLang, useTranslations, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const home = localizePath('/', lang);
+const base = stripLang(Astro.url.pathname);
+const langs = [
+  { code: 'en' as Lang, label: 'EN', hreflang: 'en', name: 'English' },
+  { code: 'pt' as Lang, label: 'PT', hreflang: 'pt-BR', name: 'Português' },
+];
+const inProjects = base.startsWith('/projects');
+const links = [
+  { href: `${home}#work`, label: t('nav.work'), current: inProjects },
+  { href: `${home}#experience`, label: t('nav.experience') },
+  { href: `${home}#about`, label: t('nav.about') },
+  { href: `${home}#contact`, label: t('nav.contact') },
+];
+---
+
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href={home} aria-label={`stuaninauts, ${t('nav.home')}`}>
+      <span class="seal" aria-hidden="true" title={t('seal.title')}>宙</span>
+      <span>stuaninauts</span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        {links.map((l) => <li><a href={l.href} aria-current={l.current ? 'true' : undefined}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="tools">
+      <ul class="langs" aria-label={t('lang.label')}>
+        {langs.map((l) => (
+          <li>
+            <a href={localizePath(base, l.code)} hreflang={l.hreflang} lang={l.hreflang} aria-current={l.code === lang ? 'true' : undefined} title={l.name}>
+              <span aria-hidden="true">{l.label}</span><span class="visually-hidden">{l.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <button class="tool" type="button" data-theme-toggle aria-label={t('theme.toggle')}>
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" /></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6" /><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const current = () => root.dataset.theme ?? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch {}
+  });
+</script>
+
+<style>
+  .top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--paper) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .top-inner { display: flex; align-items: center; gap: 24px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; font-weight: 600; letter-spacing: .01em; }
+  .brand .seal { --s: 30px; transition: transform .4s var(--ease); }
+  .brand:hover .seal { transform: rotate(4deg); }
+  nav { flex: 1; overflow-x: auto; scrollbar-width: none; }
+  nav ul { display: flex; gap: 24px; list-style: none; justify-content: flex-end; }
+  nav a { color: var(--ink-2); text-decoration: none; font-size: 15px; white-space: nowrap; padding: 6px 0; }
+  nav a:hover, nav a[aria-current] { color: var(--ink); }
+  nav a[aria-current] { text-decoration: underline; text-decoration-color: var(--seal); text-underline-offset: 8px; }
+  .tools { display: flex; gap: 8px; }
+  .tool {
+    display: inline-grid; place-items: center; height: 34px; min-width: 34px; padding: 0 9px; border-radius: 999px;
+    border: 1px solid var(--line-2); background: transparent; color: var(--ink-2); cursor: pointer;
+    font: 500 12.5px/1 var(--mono); text-decoration: none; transition: background .2s, color .2s;
+  }
+  .tool:hover { background: var(--card-2); color: var(--ink); }
+  .langs { display: flex; list-style: none; border: 1px solid var(--line-2); border-radius: 999px; padding: 2px; height: 34px; align-items: center; }
+  .langs a { display: grid; place-items: center; height: 28px; padding: 0 10px; border-radius: 999px; font: 500 12.5px/1 var(--mono); color: var(--muted); text-decoration: none; transition: background .2s, color .2s; }
+  .langs a:hover { color: var(--ink); }
+  .langs a[aria-current] { background: var(--card-2); color: var(--ink); }
+  .i-sun { display: none; }
+  :global(:root[data-theme='light']) .i-sun { display: block; }
+  :global(:root[data-theme='light']) .i-moon { display: none; }
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-theme='dark'])) .i-sun { display: block; }
+    :global(:root:not([data-theme='dark'])) .i-moon { display: none; }
+  }
+  @media (max-width: 720px) {
+    .top-inner { flex-wrap: wrap; height: auto; padding-top: 12px; padding-bottom: 10px; row-gap: 8px; }
+    .brand { flex: 1; }
+    nav { order: 3; flex-basis: 100%; }
+    nav ul { justify-content: flex-start; gap: 20px; }
+  }
+</style>
