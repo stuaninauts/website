@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "stuaninauts-website",
+  "name": "website",
   "compatibility_date": "2026-10-08",
   // Site 100% estático: sem Worker, só os arquivos de dist/.
   "assets": {
