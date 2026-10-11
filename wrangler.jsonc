@@ -9,5 +9,9 @@
   },
   "routes": [{ "pattern": "stuaninauts.com", "custom_domain": true }],
   // Evita o site duplicado em *.workers.dev (conteúdo duplicado para buscadores).
-  "workers_dev": false
+  "workers_dev": false,
+  // Previews dos PRs (Workers Builds roda `wrangler preview` fora da main). A URL fica em
+  // *.workers.dev, que a Cloudflare serve com X-Robots-Tag: noindex.
+  "preview_urls": true,
+  "previews": {}
 }
