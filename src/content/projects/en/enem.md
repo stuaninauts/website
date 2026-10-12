@@ -5,7 +5,8 @@ year: 2023
 context: "Personal project"
 metrics:
   - { value: "25", label: "past exams logged", note: "ENEM editions from 2009 to 2020" }
-  - { value: "23", label: "with known vs guessed answers", note: "per area: right answers I knew versus guessed" }
+  - { value: "23", label: "with known vs guessed answers", note: "in 3 areas: humanities, math and natural sciences" }
+  - { value: "90% vs 29%", label: "right answers: known vs guessed", note: "2,069 known and 269 guessed answers in 23 exams" }
 stack: [Python, pandas, Shiny for Python, Plotly]
 repo: https://github.com/stuaninauts/enem
 cover: ../../../assets/projects/enem-cover.jpg
