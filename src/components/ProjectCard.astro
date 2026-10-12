@@ -2,14 +2,13 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import CoverPlaceholder from './CoverPlaceholder.astro';
-import Metrics from './Metrics.astro';
 import { localizePath, type Lang } from '../i18n/ui';
 
-// withMetrics: só benchmarks mostram números no card (docs/decisions/0002).
-interface Props { project: CollectionEntry<'projects'>; lang: Lang; withMetrics?: boolean }
-const { project, lang, withMetrics = false } = Astro.props;
+// Card sem números: resultados mudam no repo do projeto e ficam só na página (docs/decisions/0002).
+interface Props { project: CollectionEntry<'projects'>; lang: Lang }
+const { project, lang } = Astro.props;
 const slug = project.id.split('/')[1];
-const { title, summary, stack, metrics, cover, coverAlt } = project.data;
+const { title, summary, stack, cover, coverAlt } = project.data;
 ---
 
 <article class="card project">
@@ -21,7 +20,6 @@ const { title, summary, stack, metrics, cover, coverAlt } = project.data;
   <div class="body">
     <h3><a href={localizePath(`/projects/${slug}`, lang)}>{title}</a></h3>
     <p class="summary">{summary}</p>
-    {withMetrics && <Metrics items={metrics.slice(0, 2)} compact />}
     <ul class="chips">{stack.slice(0, 3).map((s) => <li class="chip">{s}</li>)}</ul>
   </div>
 </article>

@@ -1,7 +1,7 @@
 ---
-title: Laya vs LLMs
+title: Laya vs LLMs vs BERT
 question: "O modelo mais novo é a escolha certa para uma tarefa de decisão real?"
-summary: "Um modelo pequeno com um LLM de reserva chegou a 82,2%, empatado com o modelo mais caro a 1/39 do custo."
+summary: "Laya, modelos BERT e LLMs testados lado a lado na triagem de reclamações de consumidores e na detecção de fraude."
 year: 2026
 context: "Projeto pessoal"
 metrics:

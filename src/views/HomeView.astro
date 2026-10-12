@@ -57,7 +57,7 @@ const { projects, benchmarks } = await getProjects(lang);
     <SectionHeading kanji="作品" title={t('work.title')} id="work" />
     <div class="grid">{projects.map((project) => <ProjectCard project={project} lang={lang} />)}</div>
     <h3 class="sub" id="benchmarks">{t('work.benchmarks')}</h3>
-    <div class="grid">{benchmarks.map((project) => <ProjectCard project={project} lang={lang} withMetrics />)}</div>
+    <div class="grid">{benchmarks.map((project) => <ProjectCard project={project} lang={lang} />)}</div>
     <p class="all"><a href={localizePath('/projects', lang)}>{t('work.all')} →</a></p>
   </section>
 

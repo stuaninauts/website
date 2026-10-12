@@ -12,15 +12,15 @@ const projects = defineCollection({
     const shot = z.object({ src: image(), alt: z.string(), caption: z.string().max(90) });
     const metric = z.object({
       value: z.string().max(14), // "82.2%", "US$ 35", "374k" (decimal do idioma)
-      label: z.string().max(32), // aparece no card e na página
+      label: z.string().max(32),
       note: z.string().max(60).optional(), // só na página
     });
     return z
       .object({
         title: z.string().max(40),
-        summary: z.string().max(120), // manchete do resultado: card, topo da página e meta description
+        summary: z.string().max(120), // o que o projeto faz ou testa, sem números: card, topo da página e meta description
         question: z.string().max(90).optional(), // pergunta que o benchmark responde (obrigatória em benchmark)
-        metrics: z.array(metric).max(4).default([]), // stat tiles: 2 primeiros no card, até 4 na página
+        metrics: z.array(metric).max(4).default([]), // stat tiles, só na página (até 4)
         year: z.number().int(),
         context: z.string().max(60).optional(), // ex.: "Personal project", "Team project with @x"
         stack: z.array(z.string()).min(1).max(8), // o card mostra os 3 primeiros

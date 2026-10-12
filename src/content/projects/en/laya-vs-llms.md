@@ -1,7 +1,7 @@
 ---
-title: Laya vs LLMs
+title: Laya vs LLMs vs BERT
 question: "Is the newest model the right choice for a real decision task?"
-summary: "A small model with an LLM fallback reached 82.2%, tied with the most expensive model at 1/39 of its cost."
+summary: "Laya, BERT models and LLMs tested side by side on routing consumer complaints and flagging fraud."
 year: 2026
 context: "Personal project"
 metrics:

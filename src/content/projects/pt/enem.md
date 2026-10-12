@@ -1,6 +1,6 @@
 ---
 title: Enem
-summary: "Um dashboard dos meus simulados do Enem: acertei 90% das questões que eu sabia e 29% dos chutes."
+summary: "Um dashboard dos meus simulados do Enem: evolução das notas por área e respostas que eu sabia versus chutei."
 year: 2023
 context: "Projeto pessoal"
 metrics:
