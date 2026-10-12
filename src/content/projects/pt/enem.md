@@ -5,7 +5,8 @@ year: 2023
 context: "Projeto pessoal"
 metrics:
   - { value: "25", label: "provas anteriores registradas", note: "edições do Enem de 2009 a 2020" }
-  - { value: "23", label: "com acertos sabidos e chutados", note: "por área: quantos acertos eu sabia e quantos chutei" }
+  - { value: "23", label: "com acertos sabidos e chutados", note: "em 3 áreas: humanas, matemática e natureza" }
+  - { value: "90% vs 29%", label: "acertos: sabidas vs chutadas", note: "2.069 sabidas e 269 chutadas em 23 provas" }
 stack: [Python, pandas, Shiny for Python, Plotly]
 repo: https://github.com/stuaninauts/enem
 cover: ../../../assets/projects/enem-cover.jpg
