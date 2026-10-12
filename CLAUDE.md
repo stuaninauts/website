@@ -17,8 +17,9 @@ deploy na Cloudflare (Workers static assets). Repositório público: tudo aqui �
 - Projetos: `src/content/projects/<en|pt>/<slug>.md`, schema em `src/content.config.ts`. Mesmo slug nos dois idiomas.
 - Ordem e categoria (projetos / benchmarks) dos cards: `src/data/project-order.ts`, editado pela skill `/ordenar-projetos`.
   Projeto novo precisa entrar ali, senão o build falha.
-- Formato dos projetos: `docs/decisions/0002-apresentacao-dos-projetos.md`. `summary` (≤ 120) é o resultado no benchmark e o que o projeto faz no projeto;
-  `metrics` são os números (até 4 na página; no card, só em benchmark); benchmark exige `question` e 3+ `metrics`. Só fatos do repo do projeto.
+- Formato dos projetos: `docs/decisions/0002-apresentacao-dos-projetos.md`. `summary` (≤ 120) diz, sem números, o que o projeto faz
+  ou o que o benchmark testou; o card não mostra números (resultados mudam no repo do projeto). `metrics` (até 4) ficam só na página;
+  benchmark exige `question` e 3+ `metrics`. Só fatos do repo do projeto.
 - Capas: imagem temática japonesa por projeto, sem texto nem números (prompts em `prompts/`, fora do git). Sem `cover`, entra a capa provisória.
 - Imagens otimizadas em `src/assets/` via `<Image />`; `public/` é copiado sem otimização.
 - Headers HTTP: `public/_headers`. CSP de script/style: `security.csp` em `astro.config.mjs`.

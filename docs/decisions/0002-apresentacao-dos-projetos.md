@@ -1,14 +1,13 @@
 # 0002: Apresentação dos projetos
 
-**Data:** 2026-10-09 · **Status:** aceita
+**Data:** 2026-10-09 · **Status:** aceita · **Revisada:** 2026-10-12 (card sem números)
 
 ## Decisões
-- **Resultado primeiro.** `summary` é uma manchete de uma frase (até 120 caracteres) com o resultado, usada no card,
-  no topo da página e na meta description. Benchmarks também declaram a pergunta que respondem (`question`).
-- **Números à vista.** `metrics` vira stat tiles: os 2 primeiros no card, até 4 na página.
-- **Card:** capa, título, uma frase e até 3 itens de stack. Sem datas. Só benchmarks mostram números no card
-  (2 primeiros `metrics`): número no card é resultado, não tamanho. Projeto com um resultado de impacto pode mudar isso.
-- **Frase do card:** no benchmark, o resultado; no projeto, o que ele faz. Números de escala do projeto ficam só na página.
+- **Frase objetiva, sem números.** `summary` (até 120 caracteres) diz o que o projeto faz ou, no benchmark, o que foi
+  testado. Vai no card, no topo da página e na meta description. Benchmarks também declaram a pergunta (`question`).
+- **Card desacoplado do repositório:** capa, título, a frase e até 3 itens de stack. Sem datas e sem números, em
+  projeto e em benchmark. Resultados mudam no repo do projeto; assim o card não precisa mudar junto.
+- **Números na página.** `metrics` vira stat tiles, até 4, só na página do projeto.
 - **Página, projeto:** manchete, ano e contexto, links, números, telas em carrossel, "o que eu fiz" em 3 a 4 bullets, stack no fim.
 - **Página, benchmark:** pergunta, manchete, números, gráfico-chave fixo (`figure`), contexto curto, resultados (3 a 5 bullets),
   método (3 a 4 bullets), limitações recolhidas em `<details>`, outros gráficos, stack.

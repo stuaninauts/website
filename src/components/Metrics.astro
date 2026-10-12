@@ -1,15 +1,15 @@
 ---
 // Números-chave do projeto. <dt> é o rótulo e <dd> o valor (leitor de tela ouve "rótulo: valor");
-// no visual o valor vem primeiro. compact = versão do card (sem notas, 2 colunas).
-interface Props { items: { value: string; label: string; note?: string }[]; compact?: boolean; label?: string }
-const { items, compact = false, label } = Astro.props;
+// no visual o valor vem primeiro.
+interface Props { items: { value: string; label: string; note?: string }[]; label?: string }
+const { items, label } = Astro.props;
 ---
 
 {items.length > 0 && (
-  <dl class:list={['metrics', { compact }]} aria-label={label}>
+  <dl class="metrics" aria-label={label}>
     {items.map((m) => (
       <div class="tile">
-        <dt>{m.label}{!compact && m.note && <span class="note">{m.note}</span>}</dt>
+        <dt>{m.label}{m.note && <span class="note">{m.note}</span>}</dt>
         <dd class="mono">{m.value}</dd>
       </div>
     ))}
@@ -23,8 +23,4 @@ const { items, compact = false, label } = Astro.props;
   dd { margin: 0; font-size: clamp(24px, 3vw, 30px); line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
   dt { font-size: 14px; color: var(--ink-2); line-height: 1.4; }
   .note { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; }
-  .compact { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .compact .tile { padding-top: 10px; }
-  .compact dd { font-size: 21px; }
-  .compact dt { font-size: 13px; color: var(--muted); }
 </style>

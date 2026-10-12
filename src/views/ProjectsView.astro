@@ -18,7 +18,7 @@ const { projects, benchmarks } = await getProjects(lang);
     <p class="lead">{t('projects.lead')}</p>
     <div class="grid">{projects.map((project) => <ProjectCard project={project} lang={lang} />)}</div>
     <h2 class="sub" id="benchmarks">{t('work.benchmarks')}</h2>
-    <div class="grid">{benchmarks.map((project) => <ProjectCard project={project} lang={lang} withMetrics />)}</div>
+    <div class="grid">{benchmarks.map((project) => <ProjectCard project={project} lang={lang} />)}</div>
   </section>
 </Base>
 
