@@ -37,7 +37,7 @@ deploy na Cloudflare (Workers static assets). Repositório público: tudo aqui �
 - Nunca use o travessão longo (em dash) em textos, comentários, docs ou commits. Use vírgula, dois-pontos, parênteses ou ponto.
 
 ## Git (GitHub Flow)
-- IMPORTANT: nunca commitar nem dar push na `main`. Branch `tipo/descricao` → PR → CI verde → merge (squash).
+- IMPORTANT: nunca commitar nem dar push na `main`. Branch `tipo/descricao` → PR → CI verde → "Rebase and merge" (os commits do PR entram na `main` em sequência, sem squash nem merge commit).
 - Commit, push e PR só quando o autor pedir: ele define os marcos e o que entra. Ao terminar uma etapa, deixe as
   mudanças no working tree, liste os arquivos e sugira a mensagem.
 - Commits em Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `ci:`, `refactor:`).
