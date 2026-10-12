@@ -1,12 +1,13 @@
 ---
 title: Enem
-summary: "A dashboard of my own ENEM practice exams: score trends by subject and answers I knew versus guessed."
+summary: "A dashboard of my ENEM practice exams: I got 90% of the questions I knew right, and 29% of my guesses."
 year: 2023
 context: "Personal project"
 metrics:
   - { value: "25", label: "past exams logged", note: "ENEM editions from 2009 to 2020" }
   - { value: "23", label: "with known vs guessed answers", note: "in 3 areas: humanities, math and natural sciences" }
   - { value: "90% vs 29%", label: "right answers: known vs guessed", note: "2,069 known and 269 guessed answers in 23 exams" }
+  - { value: "53%", label: "of misses on questions I knew", note: "212 of 402 wrong answers, in 3 areas" }
 stack: [Python, pandas, Shiny for Python, Plotly]
 repo: https://github.com/stuaninauts/enem
 cover: ../../../assets/projects/enem-cover.jpg
