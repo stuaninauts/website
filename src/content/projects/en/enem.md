@@ -1,6 +1,6 @@
 ---
 title: Enem
-summary: "A dashboard of my ENEM practice exams: I got 90% of the questions I knew right, and 29% of my guesses."
+summary: "A dashboard of my own ENEM practice exams: score trends by subject and answers I knew versus guessed."
 year: 2023
 context: "Personal project"
 metrics:
