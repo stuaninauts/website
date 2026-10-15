@@ -28,7 +28,8 @@ deploy na Cloudflare (Workers static assets). Repositório público: tudo aqui �
 ## Regras
 - Toda página e todo texto existem em EN **e** PT. Projeto novo = dois arquivos `.md` com o mesmo slug + entrada em `project-order.ts`.
 - Nenhum script inline sem hash na CSP. O único inline é `src/scripts/theme-init.js`, cujo hash é calculado no config.
-  Nada de CDN externa (fontes são self-hosted em `public/fonts/`).
+  Nada de CDN externa (fontes são self-hosted em `public/fonts/`). Única exceção: o beacon do Web Analytics da
+  Cloudflare (`static.cloudflareinsights.com`), injetado pela borda e liberado no `script-src`.
 - Nunca expor telefone, endereço ou email cru no HTML. Email: `contact@` (EN) e `contato@` (PT), aliases do Email Routing,
   montados no navegador (`Contact.astro`).
 - Foto ou imagem nova: remover metadados antes de commitar (`exiftool -all= -overwrite_original <arquivo>`), porque o original fica público no repo.

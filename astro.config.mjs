@@ -34,7 +34,12 @@ export default defineConfig({
         "base-uri 'self'",
         "form-action 'self'",
       ],
-      scriptDirective: { hashes: [sha256(themeInit)] },
+      // O Web Analytics da Cloudflare injeta o beacon (script externo) na borda; as métricas voltam
+      // para o próprio domínio (/cdn-cgi/rum), então connect-src 'self' basta.
+      scriptDirective: {
+        resources: ["'self'", 'https://static.cloudflareinsights.com'],
+        hashes: [sha256(themeInit)],
+      },
     },
   },
 });
