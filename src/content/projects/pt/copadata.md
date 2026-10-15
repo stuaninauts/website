@@ -10,10 +10,9 @@ metrics:
   - { value: "7", label: "frases no site", note: "4 mitos e 3 verdadeiras" }
 stack: [Python, pandas, Astro, Observable Plot, pytest, Cloudflare Workers]
 repo: https://github.com/stuaninauts/copadata
+demo: https://copa.stuaninauts.com/
 cover: ../../../assets/projects/copadata-cover.jpg
 coverAlt: "Pintura a nanquim de uma bola de couro antiga no capim alto, um gol sumindo na névoa e uma folha de bordo vermelha presa na rede"
-# Fica fora do site até copa.stuaninauts.com entrar no ar (ADR 0007 do CopaData); aí entra `demo` e a posição em project-order.ts.
-draft: true
 ---
 
 Toda Copa traz de volta as mesmas frases: 2 a 0 é o placar mais perigoso, o favorito sofre no mata-mata, jogar em casa ajuda. Este projeto confere cada uma com todas as Copas masculinas desde 1986.

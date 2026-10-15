@@ -10,10 +10,9 @@ metrics:
   - { value: "7", label: "claims on the site", note: "4 myths and 3 true" }
 stack: [Python, pandas, Astro, Observable Plot, pytest, Cloudflare Workers]
 repo: https://github.com/stuaninauts/copadata
+demo: https://copa.stuaninauts.com/en/
 cover: ../../../assets/projects/copadata-cover.jpg
 coverAlt: "Ink painting of an old leather football in tall grass, a goal fading into the mist and one red maple leaf caught in the net"
-# Fica fora do site até copa.stuaninauts.com entrar no ar (ADR 0007 do CopaData); aí entra `demo` e a posição em project-order.ts.
-draft: true
 ---
 
 Every World Cup brings back the same claims: 2-0 is the most dangerous lead, the favorite struggles in the knockout, playing at home helps. This project checks them against every men's World Cup since 1986.
