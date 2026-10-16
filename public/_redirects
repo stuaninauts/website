@@ -1,0 +1,5 @@
+# URLs do site antigo (HTML estático até 2026-10) que o Google ainda conhece.
+/index.html      /                 301
+/about.html      /#about           301
+/contact.html    /#contact         301
+/portfolio.html  /projects/        301

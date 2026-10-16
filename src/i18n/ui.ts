@@ -136,9 +136,12 @@ export function getLangFromUrl(url: URL): Lang {
   return first === 'pt' ? 'pt' : defaultLang;
 }
 
-/** Caminho de uma página no idioma pedido. `path` é sempre o caminho em inglês (sem prefixo). */
+/**
+ * Caminho de uma página no idioma pedido. `path` é sempre o caminho em inglês (sem prefixo).
+ * Sai sempre com barra no fim, a forma canônica das páginas: sem ela a Cloudflare responde com redirect.
+ */
 export function localizePath(path: string, lang: Lang): string {
-  const clean = path.startsWith('/') ? path : `/${path}`;
+  const clean = `/${path.replace(/^\/+|\/+$/g, '')}/`.replace('//', '/');
   if (lang === defaultLang) return clean;
   return clean === '/' ? '/pt/' : `/pt${clean}`;
 }

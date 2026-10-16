@@ -12,11 +12,13 @@ interface Props {
   description?: string;
   /** false em páginas que só existem num idioma. */
   translated?: boolean;
+  /** true fora do índice dos buscadores (ex.: 404, que também responde 200 em /404/). */
+  noindex?: boolean;
 }
 
 const lang: Lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { title, description = t('site.description'), translated = true } = Astro.props;
+const { title, description = t('site.description'), translated = true, noindex = false } = Astro.props;
 const fullTitle = title ? `${title} · ${person.name}` : `${person.name} · Data & AI Engineer`;
 const base = stripLang(Astro.url.pathname);
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -30,7 +32,7 @@ const alternates = (['en', 'pt'] as const).map((l) => ({ hreflang: htmlLang[l], 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     {translated && alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     {translated && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
     <meta name="color-scheme" content="dark light" />
