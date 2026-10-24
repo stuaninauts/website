@@ -18,12 +18,12 @@
   "dependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "7.3.8",
+    "astro": "7.4.0",
     "typescript": "^6.0.3"
   },
   "private": true,
   "devDependencies": {
-    "lefthook": "^2.2.1",
-    "wrangler": "^4.149.0"
+    "lefthook": "^2.2.2",
+    "wrangler": "^4.151.1"
   }
 }
